@@ -15,16 +15,30 @@ function ItemCalculator() {
     }
   }
 
+  function handleReset() {
+    setQty(1);
+    setSize('Medium');
+  }
+
   function handleSizeChange(event) {
     setSize(event.target.value);
   }
 
+  const totalPrice = qty * unitPrice;
+  const isFreeShipping = totalPrice >= 1000;
+
   return (
     <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md border border-slate-200/80 font-sans">
-      <div className="border-b border-slate-100 pb-3 mb-4">
+      <div className="border-b border-slate-100 pb-3 mb-4 flex justify-between items-center">
         <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
           E-Commerce Item Counter
         </h2>
+        <button
+          onClick={handleReset}
+          className="text-xs text-slate-500 hover:text-indigo-600 font-semibold underline"
+        >
+          Reset
+        </button>
       </div>
 
       <div className="mb-5 space-y-1">
@@ -61,9 +75,15 @@ function ItemCalculator() {
         </button>
       </div>
 
+      {isFreeShipping && (
+        <div className="mb-4 p-2 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg text-xs font-semibold text-center animate-pulse">
+          🎉 Free Express Shipping Unlocked! (Order &gt; ₹1000)
+        </div>
+      )}
+
       <div className="p-4 bg-indigo-50/60 border border-indigo-100 rounded-lg space-y-1">
         <p className="text-xs text-indigo-900 font-medium">Selected Variant: <b className="text-indigo-700">{size}</b></p>
-        <p className="text-base font-bold text-indigo-900">Total Price: <span className="text-indigo-600">₹{qty * unitPrice}</span></p>
+        <p className="text-base font-bold text-indigo-900">Total Price: <span className="text-indigo-600">₹{totalPrice}</span></p>
       </div>
     </div>
   );
