@@ -3,7 +3,7 @@ import ItemCalculator from './components/ItemCalculator';
 
 function App() {
   return (
-    <div className="bg-gray-50 min-h-screen p-8">
+    <div className="bg-slate-100 min-h-screen p-8 font-sans">
       <ItemCalculator />
     </div>
   );
